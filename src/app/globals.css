@@ -89,3 +89,7 @@ body {
     @apply bg-background text-foreground;
   }
 }
+
+.navLink {
+  @apply text-base justify-center md:justify-normal bg-transparent duration-150 hover:bg-primary/20 rounded-lg w-full py-2 md:px-4 flex items-center;
+}

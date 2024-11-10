@@ -1,0 +1,29 @@
+import { DataTypes } from "sequelize";
+import mainDB from "./";
+
+export const Member = mainDB.define('member', {
+    id: {
+        type: DataTypes.INTEGER,
+        primaryKey: true,
+        autoIncrement: true
+    },
+    lastName: {
+        type: DataTypes.STRING(50),
+        allowNull: false,
+    },
+    middleName: {
+        type: DataTypes.STRING(50),
+        // allowNull: false,
+    },
+    firstName: {
+        type: DataTypes.STRING(50),
+        allowNull: false,
+        // defaultValue: ''
+    },
+    // fullName: {
+    //     type: DataTypes.VIRTUAL,
+    //     get() {
+    //         return `${this.lastName} ${this.middleName} ${this.firstName}`
+    //     }
+    // },
+})
