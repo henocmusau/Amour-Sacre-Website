@@ -7,7 +7,7 @@ import { Member } from "./member";
 // classModel.hasMany(Student)
 // Student.belongsTo(classModel)
 
-mainDB.sync({ alter: true })
+// mainDB.sync({ alter: true })
 
 // export { classModel, Student, Courses, Teachers }
-export {Member}
+export { Member }

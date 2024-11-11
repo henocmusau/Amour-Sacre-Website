@@ -1,16 +1,17 @@
 import { Sequelize } from "sequelize";
-// import * as pg from 'pg'
+import * as pg from 'pg'
 import mysql from 'mysql2/promise';
 
 const mainDB = new Sequelize(
-    process.env.DB_NAME!,
-    process.env.DB_USER!,
-    process.env.DB_PASSWORD!,
+    // process.env.DB_NAME!,
+    // process.env.DB_USER!,
+    // process.env.DB_PASSWORD!,
+    'amoursacre', 'postgres', '1963',
     {
         host: process.env.DB_HOST!,
-        port: 3306, //5432 POSTGRESS
-        dialect: 'mysql',
-        dialectModule: mysql,
+        port: 5432, //5432 POSTGRESS 3306 MYSQL
+        dialect: 'postgres',
+        dialectModule: pg,
         // ssl: true
     }
 )

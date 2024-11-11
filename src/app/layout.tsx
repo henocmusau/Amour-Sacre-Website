@@ -41,7 +41,16 @@ export default function RootLayout({
           {/* <AppSidebar /> */}
           <Navbar />
           <main className=" min-h-dvh w-dvw max-w-full basis-4/5">
-            {children}
+            {/* TOPBAR */}
+            <aside className="min-h-12 border-b border-primary/30">
+              <ModeToggle />
+            </aside>
+
+            {/* MAIN CONTENT */}
+            <div className="h-full w-full p-8 pt-4">
+              {children}
+            </div>
+
           </main>
           {/* </SidebarProvider> */}
         </ThemeProvider>

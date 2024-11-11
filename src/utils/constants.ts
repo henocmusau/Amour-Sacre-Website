@@ -12,22 +12,22 @@ export const navLinks = [
         // icon: MdDashboard
     },
     {
-        label: 'Staff',
-        link: '/staff',
+        label: 'Membres',
+        link: '/members',
         // icon: FaUsers
     },
     {
-        label: 'Positions',
-        link: '/positions',
+        label: 'Staff',
+        link: '/staff',
         // icon: BsHousesFill
     },
     {
-        label: 'Transferts',
-        link: '/transferts',
+        label: 'Trésorerie',
+        link: '/amount',
         // icon: BiTransferAlt
     },
     {
-        label: 'Settings',
+        label: 'Paramètres',
         link: '/settings',
         // icon: RiSettingsFill
     },
