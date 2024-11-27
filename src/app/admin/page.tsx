@@ -1,7 +1,10 @@
+import { getAllMembers } from '@/actions/Member';
 import { DashboardStats } from '@/components/dashboard-stats';
-import { Sidebar } from '@/components/sidebar';
 
-export default function Home() {
+export default async function Home() {
+    const data = await getAllMembers()
+
+    console.log(JSON.parse(JSON.stringify(data)))
     return (
         <main className="flex-1 overflow-y-auto bg-muted/10 p-8">
             <div className="mx-auto max-w-6xl space-y-8">

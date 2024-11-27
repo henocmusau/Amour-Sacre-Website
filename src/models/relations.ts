@@ -1,14 +1,19 @@
 import mainDB from "./";
-// import { classModel } from "./classes";
 import { Member } from "./member";
 import { Category } from "./categories";
-// import { Courses } from "./courses";
-// import { Teachers } from "./teachers";
+import { Cotisation } from "./cotisations";
+import { Incoming } from "./incoming";
+import { Outgoing } from "./outgoing";
+import { News } from "./news";
 
-Category.hasMany(Member)
-Member.belongsTo(Category)
+
+// Category.hasMany(Member)
+// Member.belongsTo(Category)
+
+Member.hasMany(Cotisation)
+Cotisation.belongsTo(Member)
 
 // mainDB.sync({ force: true })
 
-// export { classModel, Student, Courses, Teachers }
-export { Member, Category }
+
+export { Member, Category, Cotisation, Incoming, Outgoing, News }

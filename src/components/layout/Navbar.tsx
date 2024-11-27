@@ -3,6 +3,7 @@
 import { Menu } from "lucide-react";
 import Link from "next/link";
 import { useState } from "react";
+import { Button } from "../ui/button";
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -12,8 +13,8 @@ export default function Navbar() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between h-16">
           <div className="flex items-center">
-            <Link href="/" className="flex items-center">
-              <span className="text-2xl font-bold text-primary">ONG News</span>
+            <Link href="/" className="flex items-center uppercase">
+              <span className="text-2xl font-bold text-primary">Amour Sacré</span>
             </Link>
           </div>
 
@@ -23,9 +24,11 @@ export default function Navbar() {
             <Link href="/news" className="text-gray-700 hover:text-primary transition">News</Link>
             <Link href="/about" className="text-gray-700 hover:text-primary transition">About</Link>
             <Link href="/contact" className="text-gray-700 hover:text-primary transition">Contact</Link>
-            <Link href="/donate" className="bg-primary text-white px-4 py-2 rounded-md hover:bg-primary/90 transition">
-              Donate
-            </Link>
+            <Button asChild>
+              <Link href="/donate" className="">
+                Faire un don
+              </Link>
+            </Button>
           </div>
 
           {/* Mobile Navigation Button */}
@@ -47,9 +50,11 @@ export default function Navbar() {
               <Link href="/news" className="block px-3 py-2 text-gray-700 hover:text-primary transition">News</Link>
               <Link href="/about" className="block px-3 py-2 text-gray-700 hover:text-primary transition">About</Link>
               <Link href="/contact" className="block px-3 py-2 text-gray-700 hover:text-primary transition">Contact</Link>
-              <Link href="/donate" className="block px-3 py-2 bg-primary text-white rounded-md hover:bg-primary/90 transition">
-                Donate
-              </Link>
+              <Button asChild>
+                <Link href="/donate" className="">
+                  Faire un don
+                </Link>
+              </Button>
             </div>
           </div>
         )}
