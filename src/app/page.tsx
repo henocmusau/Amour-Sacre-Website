@@ -1,13 +1,13 @@
-import { getAllMembers } from "@/actions/Member";
-import PageTitle from "@/components/PageTitle";
+import Hero from "@/components/home/Hero";
+import NewsCards from "@/components/home/NewsCards";
+import Testimonials from "@/components/home/Testimonials";
 
-export default async function Home() {
-  // const data = await getAllMembers()
-
-  // console.log(data)
+export default function Home() {
   return (
-    <div className="h-full w-full">
-      <PageTitle title="Dashboard" />
-    </div>
+    <main>
+      <Hero />
+      <NewsCards />
+      <Testimonials />
+    </main>
   );
 }

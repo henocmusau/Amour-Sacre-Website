@@ -1,23 +1,37 @@
-import React from 'react'
-import { Label } from '../ui/label'
+'use client'
+import React, { ReactNode } from 'react'
+
+import { FormControl, FormField, FormItem, FormLabel, FormMessage } from '../ui/form'
+import { Control } from 'react-hook-form'
 import { Input } from '../ui/input'
 
 type Props = {
-    type?: string
     label: string
-    name: string
+    name: "lastName" | "category" | "middleName" | "firstName" | "gender"
+    control: Control<{
+        lastName: string;
+        category: string;
+        gender: string;
+        middleName: string;
+        firstName: string;
+    }> | undefined
+    defaultValue?: string
 }
 
-export default function ({ type, label, name }: Props) {
+export default function CustomInput({ label, control, name, defaultValue }: Props) {
     return (
-        <div className='grid w-full gap-1.5 items-center my-2 last:mb-0'>
-            <Label htmlFor={name}>{label}</Label>
-            <Input
-                type={type || 'text'}
-                // placeholder={label}
-                name={name}
-                id={name}
-            />
-        </div>
+        <FormField
+            name={name}
+            control={control}
+            render={({ field }) => (
+                <FormItem className='my-2'>
+                    <FormLabel>{label} </FormLabel>
+                    <FormControl>
+                        <Input {...field} onChange={field.onChange} defaultValue={field.value} />
+                    </FormControl>
+                    <FormMessage />
+                </FormItem>
+            )}
+        />
     )
 }

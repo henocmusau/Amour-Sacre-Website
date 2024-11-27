@@ -33,7 +33,31 @@ export const navLinks = [
     },
 ]
 
+export const CATEGORIES = [
+    {
+        id: 1,
+        label: 'Fondateur',
+    },
+    {
+        id: 2,
+        label: 'Adhérant',
+    },
+    {
+        id: 3,
+        label: 'Bienfaiteur',
+    }
+]
 
+export const GENDERS = [
+    {
+        id: 1,
+        label: 'Homme',
+    },
+    {
+        id: 2,
+        label: 'Femme',
+    },
+]
 
 export const defaultMetadata: Metadata = {
     title: 'Amour Sacré - ASBL pour l\'éveil et le développement !',

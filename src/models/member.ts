@@ -1,11 +1,12 @@
 import { DataTypes } from "sequelize";
 import mainDB from "./";
+import { Category } from "./categories";
 
 export const Member = mainDB.define('member', {
     id: {
         type: DataTypes.INTEGER,
         primaryKey: true,
-        autoIncrement: true
+        autoIncrement: true,
     },
     lastName: {
         type: DataTypes.STRING(50),
@@ -13,6 +14,7 @@ export const Member = mainDB.define('member', {
     },
     middleName: {
         type: DataTypes.STRING(50),
+        defaultValue: ''
         // allowNull: false,
     },
     firstName: {
@@ -20,6 +22,14 @@ export const Member = mainDB.define('member', {
         allowNull: false,
         // defaultValue: ''
     },
+    categoryId: {
+        type: DataTypes.INTEGER,
+        references: {
+            model: Category,
+            key: 'id'
+        },
+        allowNull: false
+    }
     // fullName: {
     //     type: DataTypes.VIRTUAL,
     //     get() {
