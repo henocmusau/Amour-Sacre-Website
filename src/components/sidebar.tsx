@@ -21,7 +21,7 @@ import { ThemeToggle } from './theme-toggle';
 const sidebarLinks = [
   { name: 'Dashboard', href: '/', icon: LayoutDashboard },
   { name: 'Analytics', href: '/analytics', icon: BarChart3 },
-  { name: 'Users', href: '/users', icon: Users },
+  { name: 'Membres', href: '/members', icon: Users },
   { name: 'Messages', href: '/messages', icon: Mail },
   { name: 'Notifications', href: '/notifications', icon: Bell },
   { name: 'Settings', href: '/settings', icon: Settings },
@@ -61,7 +61,7 @@ export function Sidebar() {
           {sidebarLinks.map((link) => (
             <Link
               key={link.href}
-              href={link.href}
+              href={'/admin' + link.href}
               className={cn(
                 'flex items-center gap-3 rounded-lg px-3 py-2 text-sm transition-all hover:bg-accent',
                 pathname === link.href && 'bg-accent',
