@@ -1,6 +1,6 @@
 import { Sequelize } from "sequelize";
 import * as pg from 'pg'
-import mysql from 'mysql2/promise';
+// import mysql from 'mysql2/promise';
 
 const mainDB = new Sequelize(
     process.env.DB_NAME!,

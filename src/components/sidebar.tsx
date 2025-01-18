@@ -10,6 +10,8 @@ import {
   Bell,
   ChevronRight,
   Menu,
+  Landmark,
+  Newspaper
 } from 'lucide-react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
@@ -20,11 +22,11 @@ import { ThemeToggle } from './theme-toggle';
 
 const sidebarLinks = [
   { name: 'Dashboard', href: '/', icon: LayoutDashboard },
-  { name: 'Analytics', href: '/analytics', icon: BarChart3 },
+  { name: 'Cotisations', href: '/cotisations', icon: BarChart3 },
   { name: 'Membres', href: '/members', icon: Users },
-  { name: 'Messages', href: '/messages', icon: Mail },
-  { name: 'Notifications', href: '/notifications', icon: Bell },
-  { name: 'Settings', href: '/settings', icon: Settings },
+  { name: 'News', href: '/news', icon: Newspaper },
+  { name: 'Finances', href: '/finances', icon: Landmark },
+  { name: 'Paramètres', href: '/settings', icon: Settings },
 ];
 
 export function Sidebar() {

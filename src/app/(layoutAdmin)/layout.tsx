@@ -4,6 +4,7 @@ import type { Metadata } from 'next';
 import { Sidebar } from '@/components/sidebar';
 import { ThemeProvider } from '@/components/theme-provider';
 import { Inter } from 'next/font/google';
+import { NewDialog } from '@/components/Dialogs/NewDialog';
 
 export const metadata: Metadata = {
   title: 'Management',
@@ -27,9 +28,10 @@ export default function AdminLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <div className=' h-dvh w-full flex'>
+          <div className='relative h-dvh w-full flex'>
             <Sidebar />
             {children}
+            <NewDialog />
           </div>
         </ThemeProvider>
       </body>
