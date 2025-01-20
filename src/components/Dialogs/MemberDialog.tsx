@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button"
 import {
     Dialog,
     DialogContent,
+    DialogDescription,
     DialogTitle,
     DialogTrigger,
 } from "@/components/ui/dialog"
@@ -23,25 +24,20 @@ export function MemberDialog(props: Props) {
 
     const register = () => {
         //Execute save action, then closeMainModal
-        // onOpenChange(false)
-        // closeMainModal()
+        onOpenChange(false)
+        closeMainModal()
 
-        toast.success("Membre enregistré", {
-            description: "Sunday, December 03, 2023 at 9:00 AM",
-            action: {
-                label: "Cancel",
-                onClick: () => console.log("Undo"),
-            },
-        })
+
     }
 
     return (
         <Dialog open={open} onOpenChange={onOpenChange}>
             <DialogTrigger asChild>
                 <Button variant='secondary' className="w-full flex justify-start">
-                    <Users className="w-28 h-28" />Membre
+                    <Users className="w-28 h-28" />Enregistrer un(e) nouveau(elle) membre
                 </Button>
             </DialogTrigger>
+            <DialogDescription className="sr-only">Boite de dialogue de selection des actions</DialogDescription>
 
             <DialogContent className="sm:max-w-[425px] w-full box-border">
                 <DialogTitle className="sr-only">New member carousel</DialogTitle>

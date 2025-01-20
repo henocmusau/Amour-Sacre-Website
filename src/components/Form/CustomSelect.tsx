@@ -1,39 +1,36 @@
 import React, { ReactNode } from 'react'
 import { FormControl, FormField, FormItem, FormLabel, FormMessage } from '../ui/form'
-import { Select, SelectContent, SelectTrigger, SelectValue } from '../ui/select'
+import { Select, SelectContent, SelectGroup, SelectTrigger, SelectValue } from '../ui/select'
 import { Control } from 'react-hook-form'
+import { TFieldForm, TFormControl } from '@/types/form'
 
 type Props = {
-    type?: string
     label: string
-    name: "lastName" | "category" | "middleName" | "firstName" | "gender"
-    control: Control<{
-        lastName: string;
-        category: string;
-        gender: string;
-        middleName: string;
-        firstName: string;
-    }> | undefined
+    name: TFieldForm
+    control?: TFormControl
     children: ReactNode
     defaultValue?: string
+    placeholder?: string
 }
 
-export default function CustomSelect({ label, control, name, children, defaultValue }: Props) {
+export default function SelectWrapper({ label, control, name, children, defaultValue, placeholder }: Props) {
     return (
         <FormField
             control={control}
-            name={name}
+            name={name ?? ''}
             render={({ field }) => (
                 <FormItem>
                     <FormLabel>{label}</FormLabel>
                     <Select onValueChange={field.onChange} defaultValue={defaultValue}>
                         <FormControl>
                             <SelectTrigger>
-                                <SelectValue placeholder='Choisir une catégorie' />
+                                <SelectValue placeholder={placeholder ?? label} />
                             </SelectTrigger>
                         </FormControl>
                         <SelectContent>
-                            {children}
+                            <SelectGroup>
+                                {children}
+                            </SelectGroup>
                         </SelectContent>
                     </Select>
                     <FormMessage />

@@ -17,6 +17,8 @@ export const Member = mainDB.define('member', {
         defaultValue: ''
         // allowNull: false,
     },
+
+
     firstName: {
         type: DataTypes.STRING(50),
         allowNull: false,
@@ -33,33 +35,38 @@ export const Member = mainDB.define('member', {
     //     },
     //     allowNull: false
     // },
-    category: {
-        type: DataTypes.INTEGER(),
-        allowNull: false
+    cityOfBirth: {
+        type: DataTypes.STRING(50),
     },
-    adress: {
-        type: DataTypes.TEXT(),
-        // allowNull: false
+    dateOfBirth: {
+        type: DataTypes.STRING(20),
     },
-    email: {
-        type: DataTypes.STRING(60),
-    },
+
+
     adhesionDate: {
         type: DataTypes.DATEONLY(),
         defaultValue: new Date()
     },
-    phone: {
-        type: DataTypes.STRING(20),
-    },
-    cityOfBirth: {
-        type: DataTypes.STRING(50),
-    },
-    DateOfBirth: {
-        type: DataTypes.STRING(20),
+    category: {
+        type: DataTypes.INTEGER(),
+        allowNull: false
     },
     Job: {
         type: DataTypes.STRING(50),
     },
+
+
+    adress: {
+        type: DataTypes.TEXT(),
+        // allowNull: false
+    },
+    phone: {
+        type: DataTypes.STRING(20),
+    },
+    email: {
+        type: DataTypes.STRING(60),
+    },
+
     // fullName: {
     //     type: DataTypes.VIRTUAL,
     //     get() {

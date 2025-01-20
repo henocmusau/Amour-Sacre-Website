@@ -22,7 +22,7 @@ export default function AdminLayout({
 }) {
   return (
     <html lang="fr" suppressHydrationWarning>
-      <body className={`${inter.className} max-h-dvh`}>
+      <body className={`${inter.className} max-h-dvh relative`}>
         <ThemeProvider
           attribute="class"
           defaultTheme="system"

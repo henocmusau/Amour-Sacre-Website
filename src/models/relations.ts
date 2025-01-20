@@ -13,7 +13,7 @@ import { News } from "./news";
 Member.hasMany(Cotisation)
 Cotisation.belongsTo(Member)
 
-// mainDB.sync({ force: true })
+// mainDB.sync({ alter: true })
 
 
 export { Member, Category, Cotisation, Incoming, Outgoing, News }
