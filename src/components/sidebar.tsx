@@ -40,7 +40,7 @@ export function Sidebar() {
         collapsed ? 'w-16' : 'w-64'
       )}
     >
-      <div className="flex h-16 items-center justify-between px-4">
+      <div className="flex h-16 items-center justify-between px-4 relative">
         <h2
           className={cn(
             'text-lg font-semibold duration-300',

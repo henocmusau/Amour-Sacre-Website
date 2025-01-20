@@ -5,22 +5,30 @@ import React, { useState } from "react";
 import CustomInput from "./Form/CustomInput";
 import { Button } from "./ui/button";
 
-export default function MultiStepCarousel() {
+interface IProps {
+    action: () => unknown
+}
+
+export default function MultiStepCarousel(props: IProps) {
+    const { action } = props
     const [step, setStep] = useState(1);
-    // Fonction pour passer à l'étape suivante
+
     const nextStep = () => {
         if (step < 3) return setStep(step + 1);
-        alert('Formulaire soumis !')
+        action()
     };
 
-    // Fonction pour revenir à l'étape précédente
     const prevStep = () => {
         if (step > 1) setStep(step - 1);
     };
 
     return (
-        <div className="relative w-full max-w-lg mx-auto mt-10 overflow-hidden rounded-lg">
+        <div className="relative w-full max-w-lg mx-auto overflow-hidden rounded-lg">
             {/* Conteneur des étapes */}
+            <div
+                className={`progressBar mt-4 after:w-[${Math.ceil(step * 100 / 3)}%] `}
+                style={{ '--progress': `${Math.ceil(step * 100 / 3)}%` } as React.CSSProperties}
+            />
             <div
                 className="flex transition-transform duration-500 ease-in-out"
                 style={{ transform: `translateX(-${(step - 1) * 100}%)` }}
@@ -28,15 +36,15 @@ export default function MultiStepCarousel() {
                 {/* Étape 1 */}
                 <div className="w-full flex-shrink-0 p-6">
                     <h2 className="text-xl font-bold mb-4">Étape 1: Informations personnelles</h2>
-                    <CustomInput label="Nom" name="name" />
-                    <CustomInput label="Prénom" name="firstName" />
+                    <CustomInput label="Prénom" name="firstName" placeholder="Ex. John" />
+                    <CustomInput label="Nom" name="name" placeholder="Ex. Doe" />
                 </div>
 
                 {/* Étape 2 */}
                 <div className="w-full flex-shrink-0 p-6">
                     <h2 className="text-xl font-bold mb-4">Étape 2: Coordonnées</h2>
-                    <CustomInput label="Adresse email" name="email" type="email" />
-                    <CustomInput label="Numéro de téléphone" name="phone" />
+                    <CustomInput label="Adresse email" name="email" type="email" placeholder="Ex. johndoe@example.com" />
+                    <CustomInput label="Numéro de téléphone" name="phone" placeholder="Ex. 09XXXXXXXX" />
                 </div>
 
                 {/* Étape 3 */}

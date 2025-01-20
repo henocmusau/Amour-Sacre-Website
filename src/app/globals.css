@@ -83,3 +83,15 @@
     @apply bg-background text-foreground;
   }
 }
+
+
+
+.progressBar {
+  @apply relative w-full h-2 bg-secondary rounded-md;
+}
+
+.progressBar::after {
+  content: '';
+  width: var(--progress);
+  @apply absolute top-0 left-0 h-full bg-primary transition-[width] duration-500 ease-in-out;
+}

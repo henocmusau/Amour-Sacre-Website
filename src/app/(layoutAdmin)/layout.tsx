@@ -5,6 +5,7 @@ import { Sidebar } from '@/components/sidebar';
 import { ThemeProvider } from '@/components/theme-provider';
 import { Inter } from 'next/font/google';
 import { NewDialog } from '@/components/Dialogs/NewDialog';
+import { Toaster } from '@/components/ui/sonner';
 
 export const metadata: Metadata = {
   title: 'Management',
@@ -21,7 +22,7 @@ export default function AdminLayout({
 }) {
   return (
     <html lang="fr" suppressHydrationWarning>
-      <body className={inter.className}>
+      <body className={`${inter.className} max-h-dvh`}>
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
@@ -31,9 +32,10 @@ export default function AdminLayout({
           <div className='relative h-dvh w-full flex'>
             <Sidebar />
             {children}
-            <NewDialog />
           </div>
         </ThemeProvider>
+        <NewDialog />
+        <Toaster richColors />
       </body>
     </html>
   );

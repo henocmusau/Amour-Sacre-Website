@@ -3,27 +3,37 @@ import { Button } from "@/components/ui/button"
 import {
     Dialog,
     DialogContent,
-    DialogDescription,
-    DialogFooter,
-    DialogHeader,
     DialogTitle,
     DialogTrigger,
 } from "@/components/ui/dialog"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
-import { Plus, Users } from "lucide-react"
-import { NewMember } from "./NewMember"
+
+import { Users } from "lucide-react"
 import { Dispatch, SetStateAction } from "react"
-import { FormField } from "../ui/form"
 import MultiStepCarousel from "../NewMemberForm"
+import { toast } from "sonner"
 
 interface Props {
     open: boolean
     onOpenChange: Dispatch<SetStateAction<boolean>>
+    closeMainModal: () => void
 }
 
 export function MemberDialog(props: Props) {
-    const { onOpenChange, open } = props
+    const { onOpenChange, open, closeMainModal } = props
+
+    const register = () => {
+        //Execute save action, then closeMainModal
+        // onOpenChange(false)
+        // closeMainModal()
+
+        toast.success("Membre enregistré", {
+            description: "Sunday, December 03, 2023 at 9:00 AM",
+            action: {
+                label: "Cancel",
+                onClick: () => console.log("Undo"),
+            },
+        })
+    }
 
     return (
         <Dialog open={open} onOpenChange={onOpenChange}>
@@ -35,7 +45,7 @@ export function MemberDialog(props: Props) {
 
             <DialogContent className="sm:max-w-[425px] w-full box-border">
                 <DialogTitle className="sr-only">New member carousel</DialogTitle>
-                <MultiStepCarousel />
+                <MultiStepCarousel action={register} />
             </DialogContent>
         </Dialog>
     )
