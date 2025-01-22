@@ -34,7 +34,7 @@ export function MemberDialog(props: Props) {
         <Dialog open={open} onOpenChange={onOpenChange}>
             <DialogTrigger asChild>
                 <Button variant='secondary' className="w-full flex justify-start">
-                    <Users className="w-28 h-28" />Enregistrer un(e) nouveau(elle) membre
+                    <Users className="w-28 h-28" />Enregistrer membre
                 </Button>
             </DialogTrigger>
             <DialogDescription className="sr-only">Boite de dialogue de selection des actions</DialogDescription>

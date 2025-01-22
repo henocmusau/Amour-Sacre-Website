@@ -4,11 +4,11 @@ export type TFormControl = Control<{
     firstName: string;
     lastName: string;
     middleName?: string | undefined;
-    gender: "1" | "2";
+    gender: '1' | '2';
     cityOfBirth?: string
     dateOfBirth?: string
     adhesionDate: string
-    category: '1' | '2' | '3'
+    category: '1' | '2' | '3';
     job?: string
     adress: string
     phone?: string

@@ -18,15 +18,17 @@ export const formSchema = z.object({
             .min(2, { message: "Le post-nom doit contenir au moins deux caractères" })
             .max(50, { message: "Le post-nom ne peut excéder 50 lettres" })
             .trim().toLowerCase()),
+    // gender: z.string({ required_error: 'Vous devez sélectionner un genre' }),
     gender: z.enum(['1', '2'], { required_error: 'Vous devez sélectionner un genre' }),
     cityOfBirth: z.optional(z.string({
-        required_error: 'Veuillez entrer une ville'
+        // required_error: 'Veuillez entrer une ville'
     })
         .min(2, { message: "Le nom de la ville doit contenir au moins deux caractères" })
         .max(50, { message: "Le nom de la ville ne peut excéder 50 lettres" })
         .trim().toLowerCase()),
     dateOfBirth: z.optional(z.string()),
     adhesionDate: z.string(),
+    // category: z.string({ required_error: 'Vous devez sélectionner une catégorie' }),
     category: z.enum(['1', '2', '3'], { required_error: 'Vous devez sélectionner une catégorie' }),
     job: z.optional(z.string().min(3, { message: 'La profession doit contenir au moins trois caractères' }).trim().toLowerCase()),
     adress: z.string(),

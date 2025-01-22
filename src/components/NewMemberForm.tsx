@@ -21,22 +21,9 @@ export default function MultiStepCarousel(props: IProps) {
     const [step, setStep] = useState(1);
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
-        defaultValues: {
-            firstName: '',
-            lastName: '',
-            middleName: '',
-            gender: '1',
-            cityOfBirth: '',
-            dateOfBirth: '',
-            adhesionDate: '',
-            category: '1',
-            job: '',
-            adress: '',
-            phone: '',
-            email: ''
-        }
+        defaultValues: defaultFormValues
     })
-
+    const { handleSubmit, control } = form
     const nextStep = () => {
         if (step < 4) return setStep(step + 1);
         action()
@@ -51,9 +38,10 @@ export default function MultiStepCarousel(props: IProps) {
             toast.success("Membre enregistré", {
                 // description: "Sunday, December 03, 2023 at 9:00 AM",
                 description: (
-                    <pre className="mt-2 w-80 rounded-md p-4">
-                        <code>{JSON.stringify(data, null, 2)} </code>
-                    </pre>
+                    // <pre className="mt-2 w-80 rounded-md p-4">
+                    //     <code>{JSON.stringify(data, null, 2)} </code>
+                    // </pre>
+                    <p className="">{data.firstName + ' ' + data.lastName}</p>
                 ),
                 action: {
                     label: "Cancel",
@@ -62,14 +50,15 @@ export default function MultiStepCarousel(props: IProps) {
             })
             console.log(JSON.stringify(data, null, 2))
             // action()
-        } catch (error) {
+        } catch (error: any) {
             console.error(error)
+            throw new Error(error.message)
         }
     }
 
     return (
         <Form {...form}>
-            <form onSubmit={form.handleSubmit(onSubmit)} className="relative w-full max-w-lg mx-auto overflow-hidden rounded-lg">
+            <form onSubmit={handleSubmit(onSubmit)} className="relative w-full max-w-lg mx-auto overflow-hidden rounded-lg">
                 {/* Conteneur des étapes */}
                 <div
                     className={`progressBar mt-4 after:w-[${Math.ceil(step * 100 / 4)}%] `}
@@ -82,9 +71,9 @@ export default function MultiStepCarousel(props: IProps) {
                     {/* Étape 1 */}
                     <div className="w-full flex-shrink-0 py-6">
                         {/* <h2 className="text-xl font-bold mb-4">Étape 1: Informations personnelles</h2> */}
-                        <CustomInput control={form.control} label="Prénom" name="firstName" placeholder="Ex. John" />
-                        <CustomInput control={form.control} label="Nom" name="lastName" placeholder="Ex. Doe" />
-                        <CustomInput control={form.control} label="Post-nom" name="middleName" placeholder="Ex. Cooper" />
+                        <CustomInput control={control} label="Prénom" name="firstName" placeholder="Ex. John" />
+                        <CustomInput control={control} label="Nom" name="lastName" placeholder="Ex. Doe" />
+                        <CustomInput control={control} label="Post-nom" name="middleName" placeholder="Ex. Cooper" />
                     </div>
 
                     {/* Étape 2 */}
@@ -126,18 +115,40 @@ export default function MultiStepCarousel(props: IProps) {
                     >
                         Précédent
                     </Button>
-                    <Button
-                        onClick={nextStep}
-                        type={step === 4 ? 'submit' : ''}
-                        // disabled={step === 3}
-                        // className={`px-4 py-2 text-white rounded ${step === 3 ? "bg-gray-300 cursor-not-allowed" : "bg-blue-500 hover:bg-blue-600"}`}
-                        className="px-4 py-2 text-white rounded bg-blue-500 hover:bg-blue-600"
-                    >
-                        {step < 4 ? 'Suivant' : "Enregistrer"}
-                    </Button>
+
+                    {step === 4 ?
+                        <Button
+                            className="px-4 py-2 text-white rounded bg-blue-500 hover:bg-blue-600"
+                            type='submit'
+                        >
+                            Enregistrer
+                        </Button>
+                        :
+                        <Button
+                            onClick={nextStep}
+                            type={step === 4 ? 'submit' : undefined}
+                            className="px-4 py-2 text-white rounded bg-blue-500 hover:bg-blue-600"
+                        >
+                            Suivant
+                        </Button>
+                    }
                 </div>
             </form>
         </Form>
     );
 };
 
+const defaultFormValues = {
+    firstName: '',
+    lastName: '',
+    middleName: '',
+    gender: '1',
+    cityOfBirth: '',
+    dateOfBirth: '',
+    adhesionDate: '',
+    category: '1',
+    job: '',
+    adress: '',
+    phone: '',
+    email: ''
+}

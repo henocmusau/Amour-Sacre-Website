@@ -25,6 +25,7 @@ export default function CustomInput(props: IInputProps) {
                         <Input
                             type={type ?? "text"}
                             placeholder={placeholder ?? label}
+                            {...field}
                             // name={name}
                             // id={name}
                             // className="w-full p-3 border rounded mb-4"

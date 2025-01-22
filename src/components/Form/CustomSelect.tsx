@@ -1,3 +1,4 @@
+'use client'
 import React, { ReactNode } from 'react'
 import { FormControl, FormField, FormItem, FormLabel, FormMessage } from '../ui/form'
 import { Select, SelectContent, SelectGroup, SelectTrigger, SelectValue } from '../ui/select'
@@ -17,11 +18,11 @@ export default function SelectWrapper({ label, control, name, children, defaultV
     return (
         <FormField
             control={control}
-            name={name ?? ''}
+            name={name}
             render={({ field }) => (
                 <FormItem>
                     <FormLabel>{label}</FormLabel>
-                    <Select onValueChange={field.onChange} defaultValue={defaultValue}>
+                    <Select onValueChange={field.onChange} defaultValue={field.value}>
                         <FormControl>
                             <SelectTrigger>
                                 <SelectValue placeholder={placeholder ?? label} />
