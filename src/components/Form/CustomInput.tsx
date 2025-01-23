@@ -2,7 +2,7 @@
 import React from 'react'
 import { Input } from '../ui/input'
 import { Label } from '../ui/label'
-import { FormControl, FormField, FormItem, FormLabel } from '../ui/form'
+import { FormControl, FormField, FormItem, FormLabel, FormMessage } from '../ui/form'
 import { TFieldForm, TFormControl } from '@/types/form'
 
 interface IInputProps extends React.InputHTMLAttributes<HTMLInputElement> {
@@ -32,6 +32,7 @@ export default function CustomInput(props: IInputProps) {
                             {...props}
                         />
                     </FormControl>
+                    <FormMessage />
                 </FormItem>
             )}
         />

@@ -26,8 +26,6 @@ export function MemberDialog(props: Props) {
         //Execute save action, then closeMainModal
         onOpenChange(false)
         closeMainModal()
-
-
     }
 
     return (

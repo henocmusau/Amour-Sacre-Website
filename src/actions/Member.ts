@@ -21,21 +21,32 @@ export async function getAllMembers() {
     }
 }
 
-export async function CreateNewMember(formData: FormData) {
-    const firstName = formData.get('firstName')
-    const lastName = formData.get('lastName')
-    const middleName = formData.get('middleName')
+type TData = { [key: string]: string | undefined }
 
-    console.log(formData)
-    return
+export async function CreateNewMember({ firstName, lastName, middleName, gender,
+    cityOfBirth,
+    dateOfBirth,
+    adhesionDate,
+    category,
+    job,
+    adress,
+    phone,
+    email }: TData) {
+    // export async function CreateNewMember(formData: FormData) {
+    // const firstName = formData.get('firstName')
+    // const lastName = formData.get('lastName')
+    // const middleName = formData.get('middleName')
+
+    // console.log(formData)
+    // return
 
     try {
-        const data = await Member.create({ firstName, lastName, middleName });
+        const data = await Member.create({ firstName, lastName, middleName, gender, category, cityOfBirth, dateOfBirth, email, phone, adress, job, adhesionDate });
         console.log(data);
         revalidatePath('/members')
         return
     } catch (error: any) {
-        throw new Error(error.message)
+        throw new Error(error)
     }
 }
 

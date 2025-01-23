@@ -6,11 +6,12 @@ import { Button } from "./ui/button";
 import SelectWrapper from "./Form/CustomSelect";
 import { SelectItem } from "./ui/select";
 import { z } from "zod";
-import { useForm } from "react-hook-form";
+import { AsyncDefaultValues, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Form } from "./ui/form";
 import { toast } from "sonner";
 import { formSchema } from "./Form/FormSchema";
+import { CreateNewMember } from "@/actions/Member";
 
 interface IProps {
     action: () => unknown
@@ -21,7 +22,7 @@ export default function MultiStepCarousel(props: IProps) {
     const [step, setStep] = useState(1);
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
-        defaultValues: defaultFormValues
+        defaultValues: defaultFormValues as any
     })
     const { handleSubmit, control } = form
     const nextStep = () => {
@@ -34,7 +35,8 @@ export default function MultiStepCarousel(props: IProps) {
     };
 
     function onSubmit(data: z.infer<typeof formSchema>) {
-        try {
+
+        CreateNewMember(data).then(() =>
             toast.success("Membre enregistré", {
                 // description: "Sunday, December 03, 2023 at 9:00 AM",
                 description: (
@@ -48,12 +50,8 @@ export default function MultiStepCarousel(props: IProps) {
                     onClick: () => console.log("Undo"),
                 },
             })
-            console.log(JSON.stringify(data, null, 2))
-            // action()
-        } catch (error: any) {
-            console.error(error)
-            throw new Error(error.message)
-        }
+        )
+        // console.log(JSON.stringify(data, null, 2))
     }
 
     return (
@@ -111,14 +109,14 @@ export default function MultiStepCarousel(props: IProps) {
                     <Button
                         onClick={prevStep}
                         disabled={step === 1}
-                        className="px-4 py-2 text-white rounded bg-blue-500 hover:bg-blue-600"
+                    // className="px-4 py-2 text-white rounded bg-blue-500 hover:bg-blue-600"
                     >
                         Précédent
                     </Button>
 
                     {step === 4 ?
                         <Button
-                            className="px-4 py-2 text-white rounded bg-blue-500 hover:bg-blue-600"
+                            // className="px-4 py-2 text-white rounded bg-blue-500 hover:bg-blue-600"
                             type='submit'
                         >
                             Enregistrer
@@ -126,8 +124,8 @@ export default function MultiStepCarousel(props: IProps) {
                         :
                         <Button
                             onClick={nextStep}
-                            type={step === 4 ? 'submit' : undefined}
-                            className="px-4 py-2 text-white rounded bg-blue-500 hover:bg-blue-600"
+                        // type={step === 4 ? 'submit' : undefined}
+                        // className="px-4 py-2 text-white rounded bg-blue-500 hover:bg-blue-600"
                         >
                             Suivant
                         </Button>
@@ -152,3 +150,18 @@ const defaultFormValues = {
     phone: '',
     email: ''
 }
+
+type TDefaultValues = AsyncDefaultValues<{
+    firstName: string;
+    lastName: string;
+    gender: "1" | "2";
+    adhesionDate: string;
+    category: "1" | "2" | "3";
+    adress: string;
+    middleName?: string;
+    cityOfBirth?: string;
+    dateOfBirth?: string;
+    job?: string;
+    phone?: string;
+    email?: string;
+}>
