@@ -44,7 +44,7 @@ export async function CreateNewMember({ firstName, lastName, middleName, gender,
         const data = await Member.create({ firstName, lastName, middleName, gender, category, cityOfBirth, dateOfBirth, email, phone, adress, job, adhesionDate });
         console.log(data);
         revalidatePath('/members')
-        return
+        return data.dataValues
     } catch (error: any) {
         throw new Error(error)
     }
