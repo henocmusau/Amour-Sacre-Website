@@ -1,7 +1,6 @@
 
 import React from 'react'
 import { Input } from '../ui/input'
-import { Label } from '../ui/label'
 import { FormControl, FormField, FormItem, FormLabel, FormMessage } from '../ui/form'
 import { TFieldForm, TFormControl } from '@/types/form'
 

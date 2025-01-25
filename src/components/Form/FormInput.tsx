@@ -1,5 +1,5 @@
 'use client'
-import React, { ReactNode } from 'react'
+import React from 'react'
 
 import { FormControl, FormField, FormItem, FormLabel, FormMessage } from '../ui/form'
 import { Control } from 'react-hook-form'
@@ -18,7 +18,7 @@ type Props = {
     defaultValue?: string
 }
 
-export default function CustomInput({ label, control, name, defaultValue }: Props) {
+export default function CustomInput({ label, control, name }: Props) {
     return (
         <FormField
             name={name}

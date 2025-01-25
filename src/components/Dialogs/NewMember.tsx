@@ -1,11 +1,12 @@
 'use client'
-import React, { useCallback } from "react"
+import React from "react"
 
-import MultiStepCarousel from "../NewMemberForm"
+// import MultiStepCarousel from "../NewMemberForm"
 
 export function NewMember() {
 
     return (
-        <MultiStepCarousel />
+        // <MultiStepCarousel />
+        <></>
     )
 }

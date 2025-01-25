@@ -55,7 +55,7 @@ export default function NewsCards() {
             Explore Our Work
           </h2>
           <p className="mt-4 text-lg text-gray-600">
-            Discover how we're making a positive impact around the world
+            Discover how we&apos;re making a positive impact around the world
           </p>
         </div>
 

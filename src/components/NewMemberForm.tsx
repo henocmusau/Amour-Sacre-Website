@@ -1,17 +1,15 @@
 'use client'
 import React, { useState } from "react";
 
-import CustomInput from "./Form/CustomInput";
-import { Button } from "./ui/button";
-import SelectWrapper from "./Form/CustomSelect";
-import { SelectItem } from "./ui/select";
+// import CustomInput from "./Form/CustomInput";
+// import { Button } from "./ui/button";
+// import SelectWrapper from "./Form/CustomSelect";
+// import { SelectItem } from "./ui/select";
 import { z } from "zod";
-import { AsyncDefaultValues, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Form } from "./ui/form";
-import { toast } from "sonner";
+// import { Form } from "./ui/form";
 import { formSchema } from "./Form/FormSchema";
-import { CreateNewMember } from "@/actions/Member";
 import EmblaCarousel from "./Carousels/EmblaCarousel";
 import { EmblaOptionsType } from 'embla-carousel'
 
@@ -24,42 +22,42 @@ const SLIDE_COUNT = 5
 const SLIDES = Array.from(Array(SLIDE_COUNT).keys())
 
 export default function MultiStepCarousel(props: IProps) {
-    const { action } = props
-    const [step, setStep] = useState(1);
-    const form = useForm<z.infer<typeof formSchema>>({
-        resolver: zodResolver(formSchema),
-        defaultValues: defaultFormValues as any
-    })
+    // const { action } = props
+    // const [step, setStep] = useState(1);
+    // const form = useForm<z.infer<typeof formSchema>>({
+    //     resolver: zodResolver(formSchema),
+    //     defaultValues: defaultFormValues as Object
+    // })
 
-    const { handleSubmit, control } = form
-    const nextStep = () => {
-        if (step < 4) return setStep(step + 1);
-        action()
-    };
+    // const { handleSubmit, control } = form
+    // const nextStep = () => {
+    //     if (step < 4) return setStep(step + 1);
+    //     action()
+    // };
 
-    const prevStep = () => {
-        if (step > 1) setStep(step - 1);
-    };
+    // const prevStep = () => {
+    //     if (step > 1) setStep(step - 1);
+    // };
 
-    async function onSubmit(data: z.infer<typeof formSchema>) {
+    // async function onSubmit(data: z.infer<typeof formSchema>) {
 
-        const member = await CreateNewMember(data)
+    //     const member = await CreateNewMember(data)
 
-        toast.success("Membre enregistré", {
-            // description: "Sunday, December 03, 2023 at 9:00 AM",
-            description: (
-                // <pre className="mt-2 w-80 rounded-md p-4">
-                //     <code>{JSON.stringify(data, null, 2)} </code>
-                // </pre>
-                <p className="">{member.id + ' - ' + member.firstName + ' ' + member.lastName}</p>
-            ),
-            action: {
-                label: "Cancel",
-                onClick: () => console.log("Undo"),
-            },
-        })
-        console.log(JSON.stringify(member, null, 2))
-    }
+    //     toast.success("Membre enregistré", {
+    //         // description: "Sunday, December 03, 2023 at 9:00 AM",
+    //         description: (
+    //             // <pre className="mt-2 w-80 rounded-md p-4">
+    //             //     <code>{JSON.stringify(data, null, 2)} </code>
+    //             // </pre>
+    //             <p className="">{member.id + ' - ' + member.firstName + ' ' + member.lastName}</p>
+    //         ),
+    //         action: {
+    //             label: "Cancel",
+    //             onClick: () => console.log("Undo"),
+    //         },
+    //     })
+    //     console.log(JSON.stringify(member, null, 2))
+    // }
 
     return (
         // <Form {...form}>
@@ -159,17 +157,17 @@ const defaultFormValues = {
     email: ''
 }
 
-type TDefaultValues = AsyncDefaultValues<{
-    firstName: string;
-    lastName: string;
-    gender: "1" | "2";
-    adhesionDate: string;
-    category: "1" | "2" | "3";
-    adress: string;
-    middleName?: string;
-    cityOfBirth?: string;
-    dateOfBirth?: string;
-    job?: string;
-    phone?: string;
-    email?: string;
-}>
+// type TDefaultValues = AsyncDefaultValues<{
+//     firstName: string;
+//     lastName: string;
+//     gender: "1" | "2";
+//     adhesionDate: string;
+//     category: "1" | "2" | "3";
+//     adress: string;
+//     middleName?: string;
+//     cityOfBirth?: string;
+//     dateOfBirth?: string;
+//     job?: string;
+//     phone?: string;
+//     email?: string;
+// }>

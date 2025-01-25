@@ -6,8 +6,6 @@ import {
   Users,
   Settings,
   BarChart3,
-  Mail,
-  Bell,
   ChevronRight,
   Menu,
   Landmark,

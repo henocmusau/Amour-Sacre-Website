@@ -1,4 +1,3 @@
-import mainDB from "./";
 import { Member } from "./member";
 import { Category } from "./categories";
 import { Cotisation } from "./cotisations";

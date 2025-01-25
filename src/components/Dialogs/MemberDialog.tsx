@@ -11,7 +11,6 @@ import {
 import { Users } from "lucide-react"
 import { Dispatch, SetStateAction } from "react"
 import MultiStepCarousel from "../NewMemberForm"
-import { toast } from "sonner"
 
 interface Props {
     open: boolean

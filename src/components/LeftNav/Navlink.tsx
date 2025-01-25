@@ -15,7 +15,7 @@ export default function NavLink({ label, link, textVisible }: Props) {
 
     const style = 'md:w-full duration-300 overflow-x-hidden'
 
-    let textStyle = isActive ? style + ' text-slate-100' : style
+    const textStyle = isActive ? style + ' text-slate-100' : style
 
     return (
         <Link

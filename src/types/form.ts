@@ -13,7 +13,7 @@ export type TFormControl = Control<{
     adress: string
     phone?: string
     email?: string
-}, any>
+}, unknown>
 
 export type TFieldForm = "lastName" | "firstName" | "middleName" | "gender" | "cityOfBirth"
     | "dateOfBirth" | "adhesionDate" | "category" | "job" | "adress" | "phone" | "email"

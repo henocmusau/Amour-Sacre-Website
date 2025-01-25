@@ -16,8 +16,8 @@ export async function getAllMembers() {
 
         return JSON.parse(JSON.stringify(data))
 
-    } catch (error: any) {
-        throw new Error(error.message)
+    } catch (error: unknown) {
+        throw new Error(error as string)
     }
 }
 
@@ -45,8 +45,8 @@ export async function CreateNewMember({ firstName, lastName, middleName, gender,
         console.log(data);
         revalidatePath('/members')
         return data.dataValues
-    } catch (error: any) {
-        throw new Error(error)
+    } catch (error: unknown) {
+        throw new Error(error as string)
     }
 }
 
@@ -55,8 +55,8 @@ export async function CreateCategory(label: string) {
         const data = await Category.create({ label });
 
         return console.log(data);
-    } catch (error: any) {
-        throw new Error(error.message)
+    } catch (error: unknown) {
+        throw new Error(error as string)
     }
 }
 
@@ -66,7 +66,7 @@ export async function getAllCategories() {
         console.log(JSON.parse(JSON.stringify(data)))
 
         return JSON.parse(JSON.stringify(data))
-    } catch (error: any) {
-        throw new Error(error.message)
+    } catch (error: unknown) {
+        throw new Error(error as string)
     }
 }

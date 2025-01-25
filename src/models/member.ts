@@ -1,6 +1,5 @@
 import { DataTypes } from "sequelize";
 import mainDB from "./";
-import { Category } from "./categories";
 
 export const Member = mainDB.define('member', {
     id: {
@@ -37,7 +36,7 @@ export const Member = mainDB.define('member', {
         type: DataTypes.STRING(50),
     },
     dateOfBirth: {
-        type: DataTypes.STRING(20),
+        type: DataTypes.DATEONLY(),
     },
     gender: {
         type: DataTypes.STRING(2),

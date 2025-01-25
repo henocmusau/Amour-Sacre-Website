@@ -2,7 +2,6 @@
 import React, { ReactNode } from 'react'
 import { FormControl, FormField, FormItem, FormLabel, FormMessage } from '../ui/form'
 import { Select, SelectContent, SelectGroup, SelectTrigger, SelectValue } from '../ui/select'
-import { Control } from 'react-hook-form'
 import { TFieldForm, TFormControl } from '@/types/form'
 
 type Props = {
@@ -14,7 +13,7 @@ type Props = {
     placeholder?: string
 }
 
-export default function SelectWrapper({ label, control, name, children, defaultValue, placeholder }: Props) {
+export default function SelectWrapper({ label, control, name, children, placeholder }: Props) {
     return (
         <FormField
             control={control}

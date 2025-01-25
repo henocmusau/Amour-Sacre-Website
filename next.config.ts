@@ -6,7 +6,8 @@ const nextConfig: NextConfig = {
       { hostname: '127.0.0.1' },
       { hostname: "images.unsplash.com" },
     ]
-  }
+  },
+  serverExternalPackages: ['sequelize']
 };
 
 export default nextConfig;
