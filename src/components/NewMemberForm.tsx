@@ -1,35 +1,49 @@
 'use client'
 import React, { useState } from "react";
 
-// import CustomInput from "./Form/CustomInput";
-// import { Button } from "./ui/button";
-// import SelectWrapper from "./Form/CustomSelect";
-// import { SelectItem } from "./ui/select";
+import CustomInput from "./Form/CustomInput";
+import { Button } from "./ui/button";
+import SelectWrapper from "./Form/CustomSelect";
+import { SelectItem } from "./ui/select";
 import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-// import { Form } from "./ui/form";
+import { Form } from "./ui/form";
 import { formSchema } from "./Form/FormSchema";
 import EmblaCarousel from "./Carousels/EmblaCarousel";
+import FormStepTitle from "./FormStepTitle";
+
 import { EmblaOptionsType } from 'embla-carousel'
+import useEmblaCarousel from 'embla-carousel-react'
+import AutoHeight from 'embla-carousel-auto-height'
+import { usePrevNextButtons } from "./Carousels/UseCarouselNavigation";
+
 
 interface IProps {
     action: () => unknown
 }
 
-const OPTIONS: EmblaOptionsType = {}
+const OPTIONS: EmblaOptionsType = { loop: false }
 const SLIDE_COUNT = 5
 const SLIDES = Array.from(Array(SLIDE_COUNT).keys())
 
 export default function MultiStepCarousel(props: IProps) {
     // const { action } = props
     // const [step, setStep] = useState(1);
-    // const form = useForm<z.infer<typeof formSchema>>({
-    //     resolver: zodResolver(formSchema),
-    //     defaultValues: defaultFormValues as Object
-    // })
+    const form = useForm<z.infer<typeof formSchema>>({
+        resolver: zodResolver(formSchema),
+        defaultValues: defaultFormValues as Object
+    })
+    const [emblaRef, emblaApi] = useEmblaCarousel(OPTIONS, [AutoHeight()])
 
-    // const { handleSubmit, control } = form
+    const {
+        prevBtnDisabled,
+        nextBtnDisabled,
+        onPrevButtonClick,
+        onNextButtonClick
+    } = usePrevNextButtons(emblaApi)
+
+    const { handleSubmit, control } = form
     // const nextStep = () => {
     //     if (step < 4) return setStep(step + 1);
     //     action()
@@ -138,7 +152,71 @@ export default function MultiStepCarousel(props: IProps) {
         //         </div>
         //     </form>
         // </Form>
-        <EmblaCarousel slides={SLIDES} options={OPTIONS} />
+        <Form {...form}>
+            <div>
+                {/* <EmblaCarousel slides={SLIDES} options={OPTIONS} emblaRef={emblaRef}> */}
+                <form onSubmit={handleSubmit((data) => console.log(data))} className="embla w-full">
+                    <div className="embla__viewport" ref={emblaRef}>
+                        <div className="flex gap-1 ">
+                            {/* Étape 1 */}
+                            <div className="embla__slide">
+                                {/* <FormStepTitle title="Étape 1: Identité" /> */}
+                                <CustomInput control={control} label="Prénom" name="firstName" placeholder="Ex. John" />
+                                <CustomInput control={control} label="Nom" name="lastName" placeholder="Ex. Doe" />
+                                <CustomInput control={control} label="Post-nom" name="middleName" placeholder="Ex. Cooper" />
+                            </div>
+
+                            {/* Étape 2 */}
+                            <div className="embla__slide">
+                                {/* <FormStepTitle title="Étape 2: Autres informations" /> */}
+                                <SelectWrapper label="Genre" control={form.control} name="gender" placeholder="Sélectionner le genre">
+                                    <SelectItem value="1">Homme</SelectItem>
+                                    <SelectItem value="2">Femme</SelectItem>
+                                </SelectWrapper>
+                                <CustomInput control={form.control} label="Lieu de naissance" name="cityOfBirth" placeholder="Ex. Kinshasa" />
+                                <CustomInput control={form.control} label="Date de naissance" name="dateOfBirth" placeholder="Ex. 01/01/2001" />
+                            </div>
+
+                            <div className="embla__slide">
+                                {/* <FormStepTitle title="Contacts" /> */}
+                                <CustomInput control={form.control} label="Adresse" name="adress" placeholder="Ex. 10, des Oliviers, Gombe" />
+                                <CustomInput control={form.control} label="Numéro de téléphone" name="phone" placeholder="Ex. 09XXXXXXXX" />
+                                <CustomInput control={form.control} label="E-mail" name="email" type="email" placeholder="Ex. johndoe@example.com" />
+                            </div>
+
+                            <div className="embla__slide">
+                                {/* <FormStepTitle title="Étape 4 : Informations d'adhésion" /> */}
+                                <CustomInput control={form.control} label="Date d'adhésion" name="adhesionDate" placeholder="Ex. 01/01/2001" />
+                                <SelectWrapper label="Catégorie" control={form.control} name="category" placeholder="Sélectionner une catégorie">
+                                    <SelectItem value="1">Adhérant</SelectItem>
+                                    <SelectItem value="2">Fondateur</SelectItem>
+                                    <SelectItem value="3">Bienfaiteur</SelectItem>
+                                </SelectWrapper>
+                                <CustomInput control={form.control} label="Profession" name="job" placeholder="Ex. Fonctionnaire" />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div className="flex w-full justify-between gap-4 px-1 mt-4">
+                        <Button
+                            onClick={onPrevButtonClick}
+                            className='basis-1/2'
+                            disabled={prevBtnDisabled}>
+                            Prev
+                        </Button>
+                        <Button
+                            onClick={onNextButtonClick}
+                            className='basis-1/2'
+                            disabled={nextBtnDisabled}>
+                            Next
+                        </Button>
+                        {/* <PrevButton onClick={onPrevButtonClick} disabled={prevBtnDisabled} /> */}
+                        {/* <NextButton onClick={onNextButtonClick} disabled={nextBtnDisabled} /> */}
+                    </div>
+                </form>
+                {/* </EmblaCarousel> */}
+            </div>
+        </Form >
     );
 };
 
