@@ -34,7 +34,7 @@ export function MemberDialog(props: Props) {
                     <Users className="w-28 h-28" />Enregistrer membre
                 </Button>
             </DialogTrigger>
-            <DialogDescription className="sr-only">Boite de dialogue de selection des actions</DialogDescription>
+            <DialogDescription className="sr-only">Boite de dialogue d'enregistrement des membres'</DialogDescription>
 
             <DialogContent className="sm:max-w-[425px] w-full box-border">
                 <DialogTitle className="sr-only">New member carousel</DialogTitle>

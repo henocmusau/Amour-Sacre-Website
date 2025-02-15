@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button"
 import {
     Dialog,
     DialogContent,
+    DialogDescription,
     DialogHeader,
     DialogTitle,
     DialogTrigger,
@@ -27,6 +28,7 @@ export function NewDialog() {
                         <Plus className="w-12 h-12" />
                     </Button>
                 </DialogTrigger>
+                <DialogDescription className="sr-only">Boite de dialogue de selection des actions</DialogDescription>
 
                 <DialogContent className="sm:max-w-[425px]">
                     <DialogHeader>

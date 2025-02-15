@@ -5,6 +5,6 @@ type Props = {
 
 export default function FormStepTitle({ title }: Props) {
     return (
-        <h2 className="text-xl font-bold mb-4 flex-1">{title}</h2>
+        <h2 className="text-xl font-bold mb-4">{title}</h2>
     )
 }

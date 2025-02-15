@@ -12,6 +12,7 @@ type PropType = {
     options?: EmblaOptionsType
     children: React.ReactNode
     emblaRef: EmblaViewportRefType
+    submitWrapper: React.ReactNode
 }
 
 const EmblaCarousel: React.FC<PropType> = (props) => {
@@ -27,14 +28,16 @@ const EmblaCarousel: React.FC<PropType> = (props) => {
 
     return (
         <section className="embla w-full">
-            {children}
-            {/* <div className="flex gap-1 "> */}
-            {/* {slides?.map((index) => (
+            <div className="embla__viewport" ref={emblaRef}>
+                {children}
+                {/* <div className="flex gap-1 "> */}
+                {/* {slides?.map((index) => (
                         <div className="embla__slide" key={index}>
                             <div className="embla__slide__number">{index + 1}</div>
                         </div>
                     ))} */}
-            {/* </div> */}
+                {/* </div> */}
+            </div>
 
             {/* <div className="flex w-full justify-between gap-4 px-1 mt-4"> */}
             {/* <Button onClick={onPrevButtonClick} className='basis-1/2' disabled={prevBtnDisabled}>Prev</Button> */}
@@ -42,7 +45,7 @@ const EmblaCarousel: React.FC<PropType> = (props) => {
             {/* <PrevButton onClick={onPrevButtonClick} disabled={prevBtnDisabled} /> */}
             {/* <NextButton onClick={onNextButtonClick} disabled={nextBtnDisabled} /> */}
             {/* </div> */}
-        </section >
+        </section>
     )
 }
 
