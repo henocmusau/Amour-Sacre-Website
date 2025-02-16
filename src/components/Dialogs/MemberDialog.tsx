@@ -21,8 +21,7 @@ interface Props {
 export function MemberDialog(props: Props) {
     const { onOpenChange, open, closeMainModal } = props
 
-    const register = () => {
-        //Execute save action, then closeMainModal
+    const closeModals = () => {
         onOpenChange(false)
         closeMainModal()
     }
@@ -38,7 +37,7 @@ export function MemberDialog(props: Props) {
 
             <DialogContent className="sm:max-w-[425px] w-full box-border">
                 <DialogTitle className="sr-only">New member carousel</DialogTitle>
-                <MultiStepCarousel action={register} />
+                <MultiStepCarousel action={closeModals} />
             </DialogContent>
         </Dialog>
     )

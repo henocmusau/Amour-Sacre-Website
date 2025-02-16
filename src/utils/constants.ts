@@ -3,6 +3,7 @@
 // import { BsHousesFill } from "react-icons/bs";
 // import { BiTransferAlt } from "react-icons/bi";
 // import { RiSettingsFill } from "react-icons/ri";
+import { TFieldForm } from "@/types/form";
 import { Metadata } from "next";
 
 export const navLinks = [
@@ -59,12 +60,125 @@ export const GENDERS = [
     },
 ]
 
+export type TStep = {
+    title: string,
+    fields: {
+        label: string,
+        name: TFieldForm,
+        placeholder: string,
+        required: boolean,
+        isSelect?: boolean,
+        type?: string
+        data?: Array<Object>
+    }[]
+}
+
+export const newMemberFormSteps: TStep[] = [
+    {
+        title: 'Etape 1 : Identité',
+        fields: [
+            {
+                label: 'Prénom',
+                name: 'firstName',
+                placeholder: 'Ex. John',
+                required: true
+            },
+            {
+                label: 'Nom',
+                name: 'lastName',
+                placeholder: 'Ex. Doe',
+                required: true
+            },
+            {
+                label: 'Post-nom',
+                name: 'middleName',
+                placeholder: 'Ex. Cooper',
+                required: false
+            },
+        ]
+    },
+    {
+        title: 'Etape 2 : Informations',
+        fields: [
+            {
+                label: 'Genre',
+                name: 'gender',
+                placeholder: 'Sélectionner le genre',
+                required: true,
+                isSelect: true,
+                data: GENDERS
+            },
+            {
+                label: 'Lieu de naissance',
+                name: 'cityOfBirth',
+                placeholder: 'Ex. Kinshasa',
+                required: false
+            },
+            {
+                label: 'Date de naissance',
+                name: 'dateOfBirth',
+                placeholder: 'Ex. 01/01/2000',
+                required: false
+            },
+        ]
+    },
+    {
+        title: 'Etape 3 : Contacts',
+        fields: [
+            {
+                label: 'Adresse',
+                name: 'adress',
+                placeholder: 'Ex. 10, Main Street, Kinshasa',
+                required: false
+            },
+            {
+                label: 'Numéro de téléphone',
+                name: 'phone',
+                placeholder: 'Ex. 0987654321',
+                required: false
+            },
+            {
+                label: 'E-mail',
+                name: 'email',
+                placeholder: 'Ex. john@doe.com',
+                required: true,
+                type: 'email'
+            },
+        ]
+    },
+    {
+        title: 'Etape 4 : Informations d\'adhésion',
+        fields: [
+            {
+                label: 'Date d\'adhésion',
+                name: 'adhesionDate',
+                placeholder: 'Ex. 01/01/2000',
+                required: false
+            },
+            {
+                label: 'Catégorie',
+                name: 'category',
+                placeholder: 'Sélectionner une catégorie',
+                required: true,
+                isSelect: true,
+                data: CATEGORIES
+            },
+            {
+                label: 'Profession',
+                name: 'job',
+                placeholder: 'Ex. Fonctionnaire',
+                required: true
+            },
+        ]
+    },
+]
+
 export const defaultMetadata: Metadata = {
     title: 'Amour Sacré - ASBL pour l\'éveil et le développement !',
     description: 'Une solution complète pour la gestion des officiers, des cas, et des opérations au sein de votre commissariat.',
-    keywords: ['gestion, commissariat, police, officiers, cas, patrouilles, rapports'],
+    keywords: ['gestion, association, ASBL, Amour Sacré, développement, communauté'],
     generator: 'Henoc Musau',
-    applicationName: 'PTasker',
+    applicationName: 'Amour Sacré',
     referrer: 'origin-when-cross-origin',
     authors: [{ name: 'Henoc Musau' }],
     // authors: [{ name: 'Henoc Musau' }, { name: 'Josh', url: 'https://nextjs.org' }],
@@ -87,7 +201,7 @@ export const defaultMetadata: Metadata = {
         // images: ogImage.src,
         // images: '/og-image.png',
         title: 'Amour Sacré - ASBL pour l\'éveil et le développement !',
-        description: 'Découvrez comment notre application peut transformer la gestion quotidienne de votre association.',
+        description: 'Une solution complète pour la gestion de, des cas, et des opérations au sein de votre commissariat.',
         url: 'http://localhost:3000',
         siteName: 'Amour Sacré',
         images: [
