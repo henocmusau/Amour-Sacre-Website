@@ -2,12 +2,15 @@
 import React from 'react'
 import { TableCell, TableRow } from '@/components/ui/table'
 import Link from 'next/link'
+import { CATEGORIES } from '@/utils/constants'
 
 type Props = {
     member: TMember
 }
 export default function MemberRow(props: Props) {
     const { member } = props
+
+    const memberCategory = CATEGORIES.find(category => category.id.toString() == member.category.toString())
     return (
         <TableRow>
             <TableCell className='uppercase w-full'>
@@ -15,7 +18,7 @@ export default function MemberRow(props: Props) {
                     {member.firstName + ' ' + member.lastName + ' ' + member?.middleName}
                 </Link>
             </TableCell>
-            <TableCell className='text-center'>{member.category}</TableCell>
+            <TableCell className='text-center'>{memberCategory?.label}</TableCell>
         </TableRow>
     )
 }

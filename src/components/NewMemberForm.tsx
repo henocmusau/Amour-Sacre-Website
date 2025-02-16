@@ -54,7 +54,8 @@ export default function MultiStepCarousel(props: IProps) {
     //     if (step > 1) setStep(step - 1);
     // };
 
-    async function onSubmit(data: z.infer<typeof formSchema>) {
+    async function onSubmit(data: z.infer<typeof formSchema>, e: Event) {
+        if (nextBtnDisabled) return e.preventDefault()
 
         const member = await CreateNewMember(data)
 
@@ -133,8 +134,9 @@ export default function MultiStepCarousel(props: IProps) {
                         <Button
                             onClick={onNextButtonClick}
                             className='basis-1/2'
-                            disabled={nextBtnDisabled}>
-                            Next
+                        // disabled={nextBtnDisabled}
+                        >
+                            {nextBtnDisabled ? 'Save' : 'Next'}
                         </Button>
                         {/* <PrevButton onClick={onPrevButtonClick} disabled={prevBtnDisabled} /> */}
                         {/* <NextButton onClick={onNextButtonClick} disabled={nextBtnDisabled} /> */}
@@ -161,17 +163,3 @@ const defaultFormValues = {
     email: ''
 }
 
-// type TDefaultValues = AsyncDefaultValues<{
-//     firstName: string;
-//     lastName: string;
-//     gender: "1" | "2";
-//     adhesionDate: string;
-//     category: "1" | "2" | "3";
-//     adress: string;
-//     middleName?: string;
-//     cityOfBirth?: string;
-//     dateOfBirth?: string;
-//     job?: string;
-//     phone?: string;
-//     email?: string;
-// }>
