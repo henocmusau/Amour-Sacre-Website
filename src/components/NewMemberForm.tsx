@@ -1,5 +1,5 @@
 'use client'
-import React, { useState } from "react";
+import React, { BaseSyntheticEvent, FormEvent, MouseEventHandler, useState } from "react";
 
 import CustomInput from "./Form/CustomInput";
 import { Button } from "./ui/button";
@@ -12,12 +12,13 @@ import { Form } from "./ui/form";
 import { formSchema } from "./Form/FormSchema";
 import FormStepTitle from "./FormStepTitle";
 
-import { EmblaOptionsType } from 'embla-carousel'
+import { CreatePluginType, EmblaOptionsType } from 'embla-carousel'
 import useEmblaCarousel from 'embla-carousel-react'
 import AutoHeight from 'embla-carousel-auto-height'
 import { usePrevNextButtons } from "./Carousels/UseCarouselNavigation";
 import { toast } from "sonner";
 import { CreateNewMember } from "@/actions/Member";
+import { CATEGORIES } from "@/utils/constants";
 
 
 interface IProps {
@@ -26,7 +27,6 @@ interface IProps {
 
 const OPTIONS: EmblaOptionsType = { loop: false }
 const SLIDE_COUNT = 5
-const SLIDES = Array.from(Array(SLIDE_COUNT).keys())
 
 export default function MultiStepCarousel(props: IProps) {
     // const { action } = props
@@ -35,14 +35,15 @@ export default function MultiStepCarousel(props: IProps) {
         resolver: zodResolver(formSchema),
         defaultValues: defaultFormValues as Object
     })
-    const [emblaRef, emblaApi] = useEmblaCarousel(OPTIONS, [AutoHeight()])
+    const [emblaRef, emblaApi] = useEmblaCarousel(OPTIONS as any, [AutoHeight()])
+    const emblaApiNew = emblaApi as CreatePluginType<LoosePluginType, {}>
 
     const {
         prevBtnDisabled,
         nextBtnDisabled,
         onPrevButtonClick,
         onNextButtonClick
-    } = usePrevNextButtons(emblaApi)
+    } = usePrevNextButtons(emblaApiNew)
 
     const { handleSubmit, control } = form
     // const nextStep = () => {
@@ -54,8 +55,8 @@ export default function MultiStepCarousel(props: IProps) {
     //     if (step > 1) setStep(step - 1);
     // };
 
-    async function onSubmit(data: z.infer<typeof formSchema>, e: Event) {
-        if (nextBtnDisabled) return e.preventDefault()
+    async function onSubmit(data: z.infer<typeof formSchema>, e?: BaseSyntheticEvent<object, any, any>) {
+        // if (!e) return
 
         const member = await CreateNewMember(data)
 
@@ -73,6 +74,17 @@ export default function MultiStepCarousel(props: IProps) {
             },
         })
         console.log(JSON.stringify(member, null, 2))
+    }
+
+    const prevStep = (e: FormEvent<HTMLButtonElement>) => {
+        e.preventDefault()
+        onPrevButtonClick()
+    }
+
+    const nextStep = (e: FormEvent<HTMLButtonElement>) => {
+        if (!nextBtnDisabled) e.preventDefault()
+
+        onNextButtonClick()
     }
 
     return (
@@ -115,9 +127,11 @@ export default function MultiStepCarousel(props: IProps) {
                                 {/* <FormStepTitle title="Étape 4 : Informations d'adhésion" /> */}
                                 <CustomInput control={form.control} label="Date d'adhésion" name="adhesionDate" placeholder="Ex. 01/01/2001" />
                                 <SelectWrapper label="Catégorie" control={form.control} name="category" placeholder="Sélectionner une catégorie">
-                                    <SelectItem value="1">Adhérant</SelectItem>
-                                    <SelectItem value="2">Fondateur</SelectItem>
-                                    <SelectItem value="3">Bienfaiteur</SelectItem>
+                                    {
+                                        CATEGORIES.map(c => (
+                                            <SelectItem key={c.id} value={c.id.toString()}>{c.label}</SelectItem>
+                                        ))
+                                    }
                                 </SelectWrapper>
                                 <CustomInput control={form.control} label="Profession" name="job" placeholder="Ex. Fonctionnaire" />
                             </div>
@@ -126,13 +140,13 @@ export default function MultiStepCarousel(props: IProps) {
 
                     <div className="flex w-full justify-between gap-4 px-1 mt-4">
                         <Button
-                            onClick={onPrevButtonClick}
+                            onClick={prevStep}
                             className='basis-1/2'
                             disabled={prevBtnDisabled}>
                             Prev
                         </Button>
                         <Button
-                            onClick={onNextButtonClick}
+                            onClick={nextStep}
                             className='basis-1/2'
                         // disabled={nextBtnDisabled}
                         >
