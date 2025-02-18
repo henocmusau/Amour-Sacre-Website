@@ -20,7 +20,7 @@ import { toast } from "sonner";
 import { CreateNewMember } from "@/actions/Member";
 import { newMemberFormSteps } from "@/utils/constants";
 import { wait } from "@/lib/functions";
-
+import { useDotButton } from "./Carousels/EmblaCarouselDotButton";
 
 interface IProps {
     action: () => void
@@ -32,8 +32,12 @@ export default function MultiStepCarousel(props: IProps) {
     const { action } = props
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
-        defaultValues: defaultFormValues as Object
+        defaultValues: defaultFormValues as Object,
+        mode: 'all'
     })
+
+    const { handleSubmit, getFieldState, control, formState } = form
+
     type LoosePluginType = any
     const [emblaRef, emblaApi] = useEmblaCarousel(OPTIONS as any, [AutoHeight() as any])
     const emblaApiNew = emblaApi as CreatePluginType<LoosePluginType, {}>
@@ -44,8 +48,7 @@ export default function MultiStepCarousel(props: IProps) {
         onPrevButtonClick,
         onNextButtonClick
     } = usePrevNextButtons(emblaApiNew)
-
-    const { handleSubmit, control, formState: { isSubmitting } } = form
+    const { selectedIndex, scrollSnaps, onDotButtonClick } = useDotButton(emblaApiNew)
 
     async function onSubmit(data: z.infer<typeof formSchema>, e?: BaseSyntheticEvent<object, any, any>) {
         const member = await CreateNewMember(data)
@@ -68,7 +71,13 @@ export default function MultiStepCarousel(props: IProps) {
     }
 
     const nextStep = (e: FormEvent<HTMLButtonElement>) => {
-        if (!nextBtnDisabled) e.preventDefault()
+        if (!nextBtnDisabled) {
+            e.preventDefault()
+            console.log('Form isValid ?', formState.isValid)
+            console.log('Form Errors :', formState.errors)
+            const data = newMemberFormSteps[selectedIndex].fields.map(field => getFieldState(field.name, formState).invalid)
+            if (data.includes(true)) return
+        }
         onNextButtonClick()
     }
 
@@ -79,7 +88,6 @@ export default function MultiStepCarousel(props: IProps) {
                 <form onSubmit={handleSubmit(onSubmit)} className="embla w-full">
                     <div className="embla__viewport" ref={emblaRef}>
                         <div className="flex gap-1 embla__container">
-                            {/* Form Steps */}
                             {
                                 newMemberFormSteps.map((step, i) => {
                                     return (
@@ -113,13 +121,13 @@ export default function MultiStepCarousel(props: IProps) {
                         <Button
                             onClick={prevStep}
                             className='basis-1/2'
-                            disabled={prevBtnDisabled || isSubmitting}>
+                            disabled={prevBtnDisabled || formState.isSubmitting}>
                             Prev
                         </Button>
                         <Button
                             onClick={nextStep}
                             className='basis-1/2'
-                            disabled={isSubmitting}
+                            disabled={formState.isSubmitting}
                         >
                             {nextBtnDisabled ? 'Save' : 'Next'}
                         </Button>

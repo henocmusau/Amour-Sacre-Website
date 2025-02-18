@@ -14,7 +14,7 @@ export default function MemberRow(props: Props) {
     return (
         <TableRow>
             <TableCell className='uppercase w-full'>
-                <Link href={`/admin/members/${member.firstName}-${member.lastName}-${member.id}`} className='w-screen h-full'>
+                <Link href={`/admin/members/${member.firstName}-${member.lastName}-${member.id}`} className='min-w-full h-full'>
                     {member.firstName + ' ' + member.lastName + ' ' + member?.middleName}
                 </Link>
             </TableCell>

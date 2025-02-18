@@ -84,12 +84,6 @@ export const newMemberFormSteps: TStep[] = [
                 required: true
             },
             {
-                label: 'Prénom',
-                name: 'firstName',
-                placeholder: 'Ex. John',
-                required: true
-            },
-            {
                 label: 'Nom',
                 name: 'lastName',
                 placeholder: 'Ex. Doe',
