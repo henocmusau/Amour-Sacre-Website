@@ -1,7 +1,7 @@
 import React from 'react'
 import Link from 'next/link'
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
-
+import { motion } from "motion/react"
 import { CATEGORIES } from '@/utils/constants'
 
 type Props = {
@@ -11,7 +11,7 @@ export default function MemberItem({ member }: Props) {
     const memberCategory = CATEGORIES.find(category => category.id.toString() == member.category.toString())
 
     return (
-        <li className='bg-secondary/10 hover:bg-secondary/30 duration-200 shadow-md dark:shadow-inner p-4 rounded-3xl flex gap-4'>
+        <motion.li layout layoutId={member.id.toString()} className='bg-secondary/10 hover:bg-secondary/30 duration-200 shadow-md dark:shadow-inner p-4 rounded-3xl flex gap-4'>
             <Link href={`/admin/members/${member.firstName}-${member.lastName}-${member.id}`} className=''>
                 <Avatar className='h-16 w-16'>
                     <AvatarImage src="https://github.com/shadcn.png" />
@@ -25,6 +25,6 @@ export default function MemberItem({ member }: Props) {
                 <p className='capitalize text-sm text-indigo-600'>{member.job}</p>
                 <p className='capitalize mt-4 text-base flex-1 flex items-end'>{'Member ' + memberCategory?.label}</p>
             </div>
-        </li>
+        </motion.li>
     )
 }
