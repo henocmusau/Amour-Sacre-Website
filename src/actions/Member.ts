@@ -12,10 +12,18 @@ export async function getAllMembers() {
             //     attributes: ['id', 'label']
             // },
         })
-        // console.log(JSON.stringify(data))
 
         return JSON.parse(JSON.stringify(data))
+    } catch (error: unknown) {
+        throw new Error(error as string)
+    }
+}
 
+export async function getMember(id: number) {
+    try {
+        const data = await Member.findByPk(id)
+
+        return JSON.parse(JSON.stringify(data))
     } catch (error: unknown) {
         throw new Error(error as string)
     }

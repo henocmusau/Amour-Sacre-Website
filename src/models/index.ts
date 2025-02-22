@@ -16,7 +16,7 @@ const mainDB = new Sequelize(
         dialect: 'sqlite',
         storage: '../../database.sqlite',
         dialectModule: sqlite,
-        logging: false
+        // logging: false
         // dialect: 'postgres',
         // dialectModule: pg,
         // ssl: true

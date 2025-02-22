@@ -13,11 +13,11 @@ export const formSchema = z.object({
         .min(2, { message: "Le prénom doit contenir au moins deux caractères" })
         .max(50, { message: "Le prénom ne peut excéder 50 lettres" })
         .trim().toLowerCase(),
-    middleName: z.optional(
-        z.string()
-            .min(2, { message: "Le post-nom doit contenir au moins deux caractères" })
-            .max(50, { message: "Le post-nom ne peut excéder 50 lettres" })
-            .trim().toLowerCase()),
+    middleName: z.string().optional()
+    // .min(2, { message: "Le post-nom doit contenir au moins deux caractères" })
+    // .max(50, { message: "Le post-nom ne peut excéder 50 lettres" })
+    // .trim().toLowerCase()
+    ,
     // gender: z.string({ required_error: 'Vous devez sélectionner un genre' }),
     gender: z.enum(['1', '2'], { required_error: 'Vous devez sélectionner un genre' }),
     cityOfBirth: z.optional(z.string({

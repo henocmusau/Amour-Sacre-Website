@@ -89,30 +89,30 @@ export default function MultiStepCarousel(props: IProps) {
                     <div className="embla__viewport" ref={emblaRef}>
                         <div className="flex gap-1 embla__container">
                             {
-                                newMemberFormSteps.map((step, i) => {
-                                    return (
-                                        <>
-                                            {/* <FormStepTitle title={step.title} /> */}
-                                            <div className="embla__slide" key={i}>
-                                                {step.fields.map((field, k: number) => {
-                                                    if (!field.isSelect) return <CustomInput
-                                                        key={k} control={control}
-                                                        label={field.label}
-                                                        name={field.name}
-                                                        placeholder={field.placeholder} />
+                                newMemberFormSteps.map((step, i: number) => (
+                                    <>
+                                        {/* <FormStepTitle title={step.title} /> */}
+                                        <div className="embla__slide" key={i}>
+                                            {step.fields.map((field, k: number) => {
+                                                if (!field.isSelect) return <CustomInput
+                                                    key={k}
+                                                    control={control}
+                                                    label={field.label}
+                                                    name={field.name}
+                                                    placeholder={field.placeholder} />
 
-                                                    return <SelectWrapper key={k} label={field.label} control={control} name={field.name} placeholder={field.placeholder}>
-                                                        {
-                                                            field?.data?.map((d: any) => (
-                                                                <SelectItem key={d.id} value={d.id.toString()}>{d.label}</SelectItem>
-                                                            ))
-                                                        }
-                                                    </SelectWrapper>
-                                                })}
-                                            </div>
-                                        </>
-                                    )
-                                })
+                                                return <SelectWrapper key={k} label={field.label} control={control} name={field.name} placeholder={field.placeholder}>
+                                                    {
+                                                        field?.data?.map((d: any) => (
+                                                            <SelectItem key={d.id} value={d.id.toString()}>{d.label}</SelectItem>
+                                                        ))
+                                                    }
+                                                </SelectWrapper>
+                                            })}
+                                        </div>
+                                    </>
+                                )
+                                )
                             }
                         </div>
                     </div>

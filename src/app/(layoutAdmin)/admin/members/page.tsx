@@ -3,7 +3,7 @@ import PageTitle from "@/components/PageTitle";
 import MembersList from "./_components/MembersList";
 
 
-export default async function Home() {
+export default async function MembersPage() {
     const members = await getAllMembers()
 
     return (

@@ -4,6 +4,7 @@ import { Cotisation } from "./cotisations";
 import { Incoming } from "./incoming";
 import { Outgoing } from "./outgoing";
 import { News } from "./news";
+import mainDB from ".";
 
 
 // Category.hasMany(Member)
@@ -12,7 +13,7 @@ import { News } from "./news";
 Member.hasMany(Cotisation)
 Cotisation.belongsTo(Member)
 
-// mainDB.sync({ alter: true })
+// mainDB.sync({ force: true })
 
 
 export { Member, Category, Cotisation, Incoming, Outgoing, News }
